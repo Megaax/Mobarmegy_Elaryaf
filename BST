@@ -1,0 +1,88 @@
+#include <iostream>
+
+using namespace std;
+
+
+struct node
+{
+    int data;
+    node*left;
+    node*right;
+
+};
+
+
+node* create(int data)
+{
+    node*temp=new node();
+    temp->data=data;
+    temp->left=temp->right=NULL;
+    return temp;
+}
+
+void insertt(node* &root,int data)
+{
+    if(root==NULL)
+    {
+        root=create(data);
+    }
+    else if(root->data > data)
+        insertt(root->left,data);
+    else
+        insertt(root->right,data);
+
+}
+
+void display_InOrder(node*root)
+{
+
+   if(root!=NULL)
+    {
+        display_InOrder(root->left);
+        cout<<root->data<<endl;
+        display_InOrder(root->right);
+
+    }
+}
+void display_PreOrder(node*root)
+{
+    if(root!=NULL)
+    {
+        cout<<root->data<<endl;
+        display_PreOrder(root->left);
+        display_PreOrder(root->right);
+
+    }
+}
+void display_PostOrder(node*root)
+{
+
+    if(root!=NULL)
+    {
+        display_PostOrder(root->left);
+        display_PostOrder(root->right);
+        cout<<root->data<<endl;
+
+
+    }
+}
+int main()
+{
+    node*root=NULL;
+    root= create(4);
+    insertt(root,3);
+    insertt(root,7);
+    insertt(root,1);
+    insertt(root,5);
+
+    cout<<"in ORDER"<<endl;
+    display_InOrder(root);
+
+    cout<<"post ORDER"<<endl;
+    display_PostOrder(root);
+
+    cout<<"pre ORDER"<<endl;
+    display_PreOrder(root);
+
+    return 0;
+}
